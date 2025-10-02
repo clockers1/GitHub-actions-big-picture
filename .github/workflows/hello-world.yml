@@ -1,10 +1,19 @@
 name: Hello-World
-on: push
-
+on:
+  push:
+    branches:
+      - main
 jobs:
   Hello-World-job:
     runs-on: ubuntu-latest
     steps:
-      - name:check out respository code
+      - name: Check out repository code
         uses: actions/checkout@v4
-      - run: echo "$(cat hello_world.txt)"
+      - name: Display hello_world.txt content
+        run: |
+          if [ -f hello_world.txt ]; then
+            echo "$(cat hello_world.txt)"
+          else
+            echo "Error: hello_world.txt not found"
+            exit 1
+          fi
